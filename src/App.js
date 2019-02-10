@@ -14,13 +14,13 @@ class App extends Component {
   componentDidMount() {
     const itemsRef = firebase.database().ref('items')
     itemsRef.on('value', (snapshot) => {
-      //items is equal to the current value of 'items', referenced above
+      //items is equal to the current value of the 'items' collection referenced above
       let items = snapshot.val()
       //creating empty array to hold the items
       let newState = []
       //for each key in our items object
       for (let item in items) {
-        //and it to our empty array
+        //add it to our empty array
         newState.push({
           id: item,
           title: items[item].title,
@@ -39,12 +39,10 @@ class App extends Component {
     });
   }
   handleSubmit = (e) => {
-    //to prevent refreshing the page we us preventDefault
+    //prevent refreshing the page
     e.preventDefault()
-    //to create space in our database where we'd like to store the items that 
-    //people are bringing. 
-    //Do this by calling the ref method and passing in the name of the object 
-    //you'd like the items to be stored in.
+    //to create space in our database where we'd like to store the items that people are bringing. 
+    //Do this by calling the ref method and passing in the name of the object you'd like the items to be stored in.
     const itemsRef = firebase.database().ref('items')
     //setting up the data structure we'd like our items in the database to have
     const item = {
